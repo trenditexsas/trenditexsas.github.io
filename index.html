@@ -1,9 +1,29 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-tema="electrico">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>@trenditexsas</title>
+
+  <meta name="description" content="Estudiante y programador en Python, C/C++, JavaScript y HTML. Mi página personal.">
+  <meta name="theme-color" content="#050a14">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="trenditexsas">
+  <meta property="og:description" content="Estudiante y programador en Python, C/C++, JavaScript y HTML.">
+  <meta property="og:url" content="https://trenditexsas.github.io/trenditexsas/">
+  <meta property="og:image" content="https://trenditexsas.github.io/trenditexsas/preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 5 59 32 32 59 5 32Z' fill='none' stroke='%232d8cff' stroke-width='6'/%3E%3Ccircle cx='32' cy='32' r='8' fill='%232d8cff'/%3E%3C/svg%3E">
+
+  <script>
+    (function () {
+      try {
+        var tema = localStorage.getItem("tema");
+        if (tema) document.documentElement.setAttribute("data-tema", tema);
+      } catch (e) {}
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -13,9 +33,14 @@
 
   <video id="fondo-video" src="fondo.mp4" autoplay muted loop playsinline></video>
   <div class="tinte"></div>
+  <canvas id="particulas"></canvas>
 
   <div class="rombo"></div>
   <div class="hex-flotante" id="hex-flotante">0x00000000</div>
+
+  <button class="boton-tema" id="tema" title="Cambiar tema de color">
+    <i></i><span id="nombre-tema">electrico</span>
+  </button>
 
   <main class="ventana">
     <div class="barra">
@@ -23,6 +48,7 @@
       <span class="punto"></span>
       <span class="punto"></span>
       <span class="ruta">~/PROFILES/TRENDITEXSAS.TXT</span>
+      <span class="relojes" id="relojes"></span>
       <span class="online">ONLINE</span>
     </div>
 
@@ -35,7 +61,6 @@
             <div class="avatar"></div>
             <h1>trenditexsas</h1>
           </div>
-
           <p class="rol">&gt; <span id="rol"></span><span class="cursor"></span></p>
         </div>
       </div>
@@ -54,6 +79,29 @@
         <div class="chip"><span>0x</span>HTML/CSS</div>
       </div>
 
+      <div class="reproductor" id="reproductor">
+        <button class="play" id="play" title="Reproducir / pausar">&#9654;</button>
+
+        <div class="info">
+          <div class="titulo-cancion">
+            <b>Nombre de la canción</b>
+            <small>Artista</small>
+          </div>
+          <div class="progreso-fila">
+            <span id="tiempo-actual">0:00</span>
+            <input type="range" id="progreso" min="0" max="100" step="0.1" value="0">
+            <span id="tiempo-total">0:00</span>
+          </div>
+        </div>
+
+        <div class="ecualizador"><i></i><i></i><i></i><i></i><i></i></div>
+
+        <div class="volumen">
+          <button id="mute" title="Silenciar">&#128266;</button>
+          <input type="range" id="volumen" min="0" max="1" step="0.01" value="0.5">
+        </div>
+      </div>
+
       <div class="pie">
         <a class="enlace" href="https://github.com/trenditexsas" target="_blank">
           <img src="https://cdn.simpleicons.org/github/white" alt="">
@@ -64,7 +112,11 @@
           <span><b>Discord</b><small>trenditexsas</small></span>
         </a>
 
-        <button class="boton" id="play">&#9835; Play track</button>
+        <div class="estado" id="discord-estado">
+          <i class="punto-estado"></i>
+          <span><b id="discord-texto">---</b><small id="discord-detalle">---</small></span>
+        </div>
+
         <div class="visitas">VISITS: <b id="visitas">----</b></div>
       </div>
     </div>
