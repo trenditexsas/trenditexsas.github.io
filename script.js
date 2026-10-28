@@ -84,9 +84,16 @@ const musica = document.getElementById("musica");
 const botonVolumen = document.getElementById("volumen");
 
 entrada.addEventListener("click", () => {
-    entrada.classList.add("oculta");
-    musica.volume = 0.5;
-    musica.play().catch(() => { });
+  entrada.classList.add("oculta");
+  musica.volume = 0.5;
+  musica.play().catch(() => {});
+
+  document.querySelectorAll(".ventana").forEach((ventana, i) => {
+    setTimeout(() => {
+      ventana.classList.add("abierta");
+      traerAlFrente(ventana);
+    }, i * 300);
+  });
 });
 
 botonVolumen.addEventListener("click", () => {
